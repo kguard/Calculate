@@ -4,39 +4,41 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
-import java.nio.file.Files.find
+import com.example.calculate.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    lateinit var binding : ActivityMainBinding;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        //setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater);
+        setContentView(binding.root)
 
-        val cal: EditText = findViewById(R.id.editTextTextPersonName4);
         val numButton = arrayOf<Button>(
-            findViewById(R.id.button0),
-            findViewById(R.id.button1),
-            findViewById(R.id.button2),
-            findViewById(R.id.button3),
-            findViewById(R.id.button4),
-            findViewById(R.id.button5),
-            findViewById(R.id.button6),
-            findViewById(R.id.button7),
-            findViewById(R.id.button8),
-            findViewById(R.id.button9)
+            binding.button0,
+            binding.button1,
+            binding.button2,
+            binding.button3,
+            binding.button4,
+            binding.button5,
+            binding.button6,
+            binding.button7,
+            binding.button8,
+            binding.button9,
         )
+
         val operateButton = arrayOf<Button>(
-            findViewById(R.id.plus),
-            findViewById(R.id.minus),
-            findViewById(R.id.multipli),
-            findViewById(R.id.divide)
+            binding.plus,
+            binding.minus,
+            binding.multipli,
+            binding.divide
         )
-        val clearButton: Button = findViewById(R.id.clear)
-        val resultButton:Button=findViewById(R.id.result)
 
+        var clear=true
 
-        fun operate(a: String, b: String, c: String): Double {
+        fun operate(a: String, b: String, c: String): Double { //단순 계산 하는 함수
             var result = 0.0
             var ca=a.toDouble();
             var cb=b.toDouble();
@@ -57,7 +59,7 @@ class MainActivity : AppCompatActivity() {
             return result
         }
 
-         fun calculate(a:String):Double{
+         fun calculate(a:String):Double{  //전체 계산하는 함수
             var b:List<String> = a.split(" ")
             if(b.size==1)
             {
@@ -95,28 +97,37 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        for(btn in numButton)
+        for(btn in numButton)  //숫자 버튼
         {
             btn.setOnClickListener{
-                var a=cal.text.toString()
+                if(clear==false)
+                {
+                    binding.editTextCal.setText("")
+                    clear=true
+                }
+                var a=binding.editTextCal.text.toString()
                 var b=btn.text.toString()
-                cal.setText(a+b)
+                binding.editTextCal.setText(a+b)
             }
         }
-        for (btn in operateButton)
+        for (btn in operateButton) //연산자 버튼
             btn.setOnClickListener{
-                var a=cal.text.toString()
+                if(clear==false)
+                {
+                    binding.editTextCal.setText("")
+                    clear=true
+                }
+                var a=binding.editTextCal.text.toString()
                 var b=btn.text.toString()
-                cal.setText(a+b)
+                binding.editTextCal.setText(a+b)
             }
-        clearButton.setOnClickListener{
-            cal.setText("")
-        }
-        resultButton.setOnClickListener{
-            var a=cal.text.toString()
+        binding.clear.setOnClickListener { binding.editTextCal.setText("") }
+        binding.result.setOnClickListener {
+            var a=binding.editTextCal.text.toString()
             var b:List<String> = a.split(" ");
             if(b[b.lastIndex].isNullOrBlank()) Toast.makeText(this@MainActivity, "수식에 오류가 있습니다.", Toast.LENGTH_SHORT).show()
-            else cal.setText(calculate(a).toString())
+            else binding.editTextCal.setText(calculate(a).toString())
+            clear=false
         }
 
     }
