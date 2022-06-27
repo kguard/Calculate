@@ -20,19 +20,30 @@
         android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF"
         android:textColorHint="#000000"
-        android:textSize="34sp"
+        android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TableLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="30dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/tableLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/historyButton" />
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCal">
+        app:layout_constraintTop_toBottomOf="@+id/historyButton">
 
         <TableRow
             android:layout_width="match_parent"
@@ -69,7 +80,7 @@
             <Button
                 android:id="@+id/button9"
                 android:layout_width="wrap_content"
-                android:layout_height="120dp"
+                android:layout_height="119dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="5sp"
                 android:layout_marginRight="5sp"
@@ -273,5 +284,16 @@
                 app:cornerRadius="30dp" />
         </TableRow>
     </TableLayout>
+
+    <ImageButton
+        android:id="@+id/historyButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:background="#000000"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCal"
+        app:srcCompat="@android:drawable/ic_menu_recent_history" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
