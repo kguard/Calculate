@@ -11,13 +11,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding : ActivityMainBinding;
-
+     val binding by lazy {
+         ActivityMainBinding.inflate(layoutInflater)
+     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater);
+        //binding = ActivityMainBinding.inflate(layoutInflater);
         setContentView(binding.root)
 
+        with(binding){
+            button0.setOnClickListener {  }
+        }
 
         val numButton = arrayOf<Button>(
             binding.button0,
@@ -38,8 +42,8 @@ class MainActivity : AppCompatActivity() {
             binding.divide
         )
         var clear=true
-        var viewModel=VM(this);
-        viewModel.clear()
+        var viewModel=VM(this)
+        //viewModel.clear()
 
         for(btn in numButton)  //숫자 버튼
         {

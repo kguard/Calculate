@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModel
 
 class VM(context: Context): ViewModel() {
     var share:SharedDB= SharedDB(context)
-    fun operate(a: String, b: String, c: String): Double { //단순 계산 하는 함수
+    private fun operate(a: String, b: String, c: String): Double { //단순 계산 하는 함수
         var result = 0.0
-        var ca=a.toDouble();
+        val ca=a.toDouble();
         var cb=b.toDouble();
         when (c) {
             "+" -> {
@@ -26,7 +26,7 @@ class VM(context: Context): ViewModel() {
         return result
     }
     fun calculate(a:String):Double{  //전체 계산하는 함수
-        var b:List<String> = a.split(" ")
+        val b:List<String> = a.split(" ")
         if(b.size==1)
         {
             return b[0].toDouble()
